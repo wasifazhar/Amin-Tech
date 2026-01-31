@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" href="/frontend/icon.png">
+
+  <title>Contact Us | Amin Tech Solutions</title>
+
+
+  <style>
+    /* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  border-radius: 5px;
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 900px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0f172a;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background: #ffffff;
+    }
+
+    /* NAVBAR */
+      nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 1rem 5%;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #3b82f6;
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1.4rem;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff;
+      padding: 8rem 5% 5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5f5;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    /* SECTION */
+    section {
+      padding: 5rem 5%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    /* CONTACT GRID */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .info-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .info-item h4 {
+      color: #0f172a;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-item p {
+      color: #64748b;
+    }
+
+    /* FORM */
+    form {
+      background: #f8fafc;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1.2rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* MAP */
+    .map {
+      margin-top: 4rem;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    iframe {
+      width: 100%;
+      height: 350px;
+      border: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @media(max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="/frontend/icon.png" alt="Amin Tech Solutions Logo">
+        Amin Tech Solutions
+      </a>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="why-us.html">Why Us</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="about.html">About Us</a></li>
+
+      <li class="mobile-only"><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn desktop-only">Contact</a>
+
+    <!-- Hamburger -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Contact Us</h1>
+  <p>
+    Let’s discuss how Amin Tech Solutions can help
+    transform your business with technology.
+  </p>
+</section>
+
+<section>
+  <h2>Get in Touch</h2>
+
+  <div class="contact-grid">
+    <!-- CONTACT INFO -->
+    <div class="info-box">
+      <div class="info-item">
+        <h4>Email</h4>
+        <p>info@amintechsol.online</p>
+      </div>
+
+      <div class="info-item">
+        <h4>Phone</h4>
+        <p>+92 4235153538</p>
+      </div>
+
+      <div class="info-item">
+        <h4>Office Location</h4>
+        <p>Lahore, Pakistan</p>
+      </div>
+
+      <div class="info-item">
+        <h4>Business Hours</h4>
+        <p>Monday – Friday | 9:00 AM – 6:00 PM</p>
+      </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <form action="http://localhost:3000/contact" method="POST">
+
+  <input 
+    type="text" 
+    name="name"
+    placeholder="Full Name" 
+    required 
+  />
+
+  <input 
+    type="email" 
+    name="email"
+    placeholder="Email Address" 
+    required 
+  />
+
+  <input 
+    type="tel" 
+    name="phone"
+    placeholder="Phone Number" 
+  />
+
+  <select name="service" required>
+    <option value="">Select a Service</option>
+    <option>Enterprise Web Solutions</option>
+    <option>Mobile & Cloud Applications</option>
+    <option>Digital Transformation</option>
+    <option>IT Consulting</option>
+  </select>
+
+  <textarea 
+    name="message"
+    rows="5" 
+    placeholder="Tell us about your project" 
+    required>
+  </textarea>
+
+  <button type="submit">Send Message</button>
+
+</form>
+
+  </div>
+
+  <!-- MAP -->
+  <div class="map">
+    <iframe 
+      src="https://maps.google.com/maps?q=Lahore%20Pakistan&t=&z=13&ie=UTF8&iwloc=&output=embed">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  © 2026 Amin Tech Solutions. All rights reserved.
+</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

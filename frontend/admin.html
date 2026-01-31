@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel | Amin Tech Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* RESET */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+    }
+
+    /* 🔒 FIXED ADMIN HEADER */
+    .admin-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #0f172a;
+      color: #fff;
+
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20px;
+      z-index: 9999;
+    }
+
+    .admin-header span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .admin-header button {
+      width: auto;
+      padding: 6px 18px;
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .admin-header button:hover {
+      background: #b91c1c;
+    }
+
+    /* PAGE CONTENT */
+    .page-wrapper {
+      padding: 100px 40px 40px;
+    }
+
+    /* LOGIN BOX */
+    .login-box {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* ADMIN PANEL */
+    .admin-panel {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background: #0f172a;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🔒 FIXED HEADER -->
+<div class="admin-header" id="adminHeader">
+  <span>Admin Panel</span>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- 🔐 LOGIN FORM -->
+  <div class="login-box" id="loginBox">
+    <h2>Admin Login</h2>
+
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+
+    <div class="error" id="error"></div>
+  </div>
+
+  <!-- 📊 ADMIN PANEL -->
+  <div class="admin-panel" id="adminPanel">
+
+    <h2>📩 Contact Messages</h2>
+    <table id="contacts">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Service</th>
+        <th>Message</th>
+        <th>Date</th>
+      </tr>
+    </table>
+
+    <h2>🧑‍💼 Job Applications</h2>
+    <table id="applications">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Position</th>
+        <th>Intro</th>
+        <th>CV</th>
+        <th>Date</th>
+      </tr>
+    </table>
+
+  </div>
+
+</div>
+
+<script>
+  const ADMIN_USER = "admin@20";
+  const ADMIN_PASS = "admin123";
+
+  window.onload = function () {
+    if (localStorage.getItem("adminLoggedIn") === "true") {
+      showAdmin();
+      loadData();
+    }
+  };
+
+  function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    if (user === ADMIN_USER && pass === ADMIN_PASS) {
+      localStorage.setItem("adminLoggedIn", "true");
+      showAdmin();
+      loadData();
+    } else {
+      document.getElementById("error").innerText = "❌ Invalid username or password";
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("adminLoggedIn");
+    location.reload();
+  }
+
+  function showAdmin() {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("adminHeader").style.display = "flex";
+  }
+
+  function loadData() {
+    fetch("/admin/contacts")
+      .then(res => res.json())
+      .then(data => {
+        const table = document.getElementById("contacts");
+        data.forEach(row => {
+          table.innerHTML += `
+            <tr>
+              <td>${row.name}</td>
+              <td>${row.email}</td>
+              <td>${row.service}</td>
+              <td>${row.message}</td>
+              <td>${formatPKT(row.created_at)}</td>
+            </tr>`;
+        });
+      });
+
+    fetch("/admin/applications")
+      .then(res => res.json())
+      .then(data => {
+        const table = document.getElementById("applications");
+        data.forEach(row => {
+          table.innerHTML += `
+            <tr>
+              <td>${row.name}</td>
+              <td>${row.email}</td>
+              <td>${row.phone}</td>
+              <td>${row.position}</td>
+              <td>${row.intro}</td>
+              <td><a href="/uploads/cvs/${row.cv_file}" target="_blank">Download</a></td>
+              <td>${formatPKT(row.created_at)}</td>
+            </tr>`;
+        });
+      });
+  }
+
+  function formatPKT(datetime) {
+    return new Date(datetime).toLocaleString("en-US", {
+      timeZone: "Asia/Karachi",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+</script>
+
+</body>
+</html>

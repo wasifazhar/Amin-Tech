@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" href="/frontend/icon.png">
+
+  <title>Industries | Amin Tech Solutions</title>
+  
+
+  <style>
+    /* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  border-radius: 5px;
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 900px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0f172a;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background: #ffffff;
+    }
+
+    /* NAVBAR */
+      nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(15, 23, 42, 0.95);
+      padding: 1rem 5%;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #3b82f6;
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1.4rem;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff;
+      padding: 8rem 5% 5rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5f5;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    /* SECTION */
+    section {
+      padding: 5rem 5%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .card {
+      background: #f8fafc;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .card p {
+      color: #64748b;
+    }
+
+    /* CTA */
+    .cta {
+      background: #0f172a;
+      color: #fff;
+      text-align: center;
+      padding: 5rem 5%;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.9rem 2.5rem;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @media(max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<nav>
+  <div class="nav-container">
+   <div class="logo">
+      <a href="index.html">
+        <img src="/frontend/icon.png" alt="Amin Tech Solutions Logo">
+        Amin Tech Solutions
+      </a>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="why-us.html">Why Us</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="about.html">About Us</a></li>
+
+      <li class="mobile-only"><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn desktop-only">Contact</a>
+
+    <!-- Hamburger -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+<section class="hero">
+  <h1>Industries We Serve</h1>
+  <p>
+    Delivering specialized technology solutions across industries
+    to solve complex business challenges.
+  </p>
+</section>
+
+<section>
+  <h2>Our Industry Expertise</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🏦</div>
+      <h3>Banking & Finance</h3>
+      <p>
+        Secure, compliant, and scalable solutions for banks,
+        financial institutions, and fintech companies.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💳</div>
+      <h3>FinTech</h3>
+      <p>
+        Digital payment systems, core banking integrations,
+        and next-generation financial platforms.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏥</div>
+      <h3>Healthcare</h3>
+      <p>
+        Healthcare management systems, patient portals,
+        and secure health data platforms.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>E-Commerce</h3>
+      <p>
+        Scalable online stores, payment integrations,
+        and customer-centric digital experiences.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏢</div>
+      <h3>Enterprise & Corporate</h3>
+      <p>
+        ERP systems, internal platforms, and enterprise-grade
+        business applications.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📡</div>
+      <h3>Technology & Startups</h3>
+      <p>
+        MVP development, cloud infrastructure,
+        and rapid product scaling solutions.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Let’s Build Industry-Ready Solutions</h2>
+  <p>Partner with us to create technology that drives real impact.</p>
+  <a href="contact.html">Start a Conversation</a>
+</section>
+
+<footer>
+  © 2026 Amin Tech Solutions. All rights reserved.
+</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>
